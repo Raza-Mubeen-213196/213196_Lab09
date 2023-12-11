@@ -1,0 +1,89 @@
+Raza Mubeen
+213196 
+
+     			Lab_09 Exercise
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace example
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            InitializeData();
+        }
+
+        public class Employee
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public decimal Salary { get; set; }
+
+            // Parametrized constructor
+            public Employee(string firstName, string lastName, decimal salary)
+            {
+                FirstName = firstName;
+                LastName = lastName;
+                Salary = salary;
+            }
+        }
+
+        // List to store Employee objects
+        private List<Employee> employees;
+
+     
+
+        // Initialize data with 10 Employee objects
+        private void InitializeData()
+        {
+            employees = new List<Employee>
+            {
+                new Employee("John", "Doe", 50000),
+                new Employee("Jane", "Smith", 60000),
+                new Employee("Bob", "Johnson", 75000),
+                // Add more employees as needed
+            };
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var filteredEmployees = employees.Where(emp => emp.Salary > 60000);
+            DisplayResults(filteredEmployees);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var filteredEmployees = employees.Where(emp => emp.Salary > 60000);
+            DisplayResults(filteredEmployees);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var orderedEmployees = employees.OrderBy(emp => emp.LastName);
+            DisplayResults(orderedEmployees);
+        }
+        private void DisplayResults(IEnumerable<Employee> result)
+        {
+            listView1.Items.Clear();
+            foreach (var employee in result)
+            {
+                var item = new ListViewItem(new[]
+                {
+                    employee.FirstName,
+                    employee.LastName,
+                    employee.Salary.ToString()
+                });
+                listView1.Items.Add(item);
+            }
+        }
+    }
+}
